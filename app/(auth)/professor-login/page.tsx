@@ -5,19 +5,18 @@ import { useAuth } from "@/hooks/use-auth";
 import { mockLogin } from "@/lib/mock-auth";
 import { GalleryVerticalEndIcon } from "lucide-react";
 import { useRouter } from "next/dist/client/components/navigation";
-import toast from "react-hot-toast";
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login } = useAuth();
-
-  const handleSubmit = (data: { id: string; password: string }) => {
+    const { login } = useAuth();
+  
+    const handleSubmit = (data: { id: string; password: string }) => {
     const user = mockLogin(data.id, data.password);
-    if (user?.role === "admin") {
+    if (user?.role === "professor") {
       login(user);
-      router.push("/admin/dashboard");
+      router.push("/professor/dashboard");
     } else {
-      toast.error("Credenciais inválidas!");
+      alert("Credenciais inválidas!");
     }
   };
 
@@ -34,11 +33,11 @@ export default function LoginPage() {
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
-            <LoginForm
-              idLabel="ID Admin"
-              idPlaceholder="admin001"
-              title="Bem-vindo, Admin"
-              subtitle="Acesse o painel de administração"
+            <LoginForm 
+              idLabel="ID Professor"
+              idPlaceholder="professor001"
+              title="Bem-vindo, Professor"
+              subtitle="Acesse o painel de professor"
               onSubmit={handleSubmit}
             />
           </div>
