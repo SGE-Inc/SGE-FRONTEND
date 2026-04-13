@@ -6,7 +6,10 @@ import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
-interface LoginFormProps extends Omit<React.ComponentProps<"form">, "onSubmit"> {
+interface LoginFormProps extends Omit<
+  React.ComponentProps<"form">,
+  "onSubmit"
+> {
   idLabel?: string;
   idPlaceholder?: string;
   title?: string;
@@ -16,10 +19,10 @@ interface LoginFormProps extends Omit<React.ComponentProps<"form">, "onSubmit"> 
 
 export function LoginForm({
   className,
-  idLabel = "ID Estudantil",
-  idPlaceholder = "DL23...",
-  title = "Seja bem-vindo de volta",
-  subtitle = "Insira seus dados para teres acesso à tua conta",
+  idLabel = "ID do usuário",
+  idPlaceholder = "admin001, DL23001 ou PROF001",
+  title = "Acesse sua conta",
+  subtitle = "Informe seu ID e senha para entrar",
   onSubmit,
   ...props
 }: LoginFormProps) {
@@ -36,11 +39,17 @@ export function LoginForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className={cn("flex flex-col gap-6", className)} {...props}>
+    <form
+      onSubmit={handleSubmit}
+      className={cn("flex flex-col gap-6", className)}
+      {...props}
+    >
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
           <h1 className="text-2xl font-bold">{title}</h1>
-          <p className="text-sm text-balance text-muted-foreground">{subtitle}</p>
+          <p className="text-sm text-balance text-muted-foreground">
+            {subtitle}
+          </p>
         </div>
         <Field>
           <FieldLabel htmlFor="id">{idLabel}</FieldLabel>
@@ -56,7 +65,10 @@ export function LoginForm({
         <Field>
           <div className="flex items-center">
             <FieldLabel htmlFor="password">Senha</FieldLabel>
-            <a href="#" className="ml-auto text-sm underline-offset-4 hover:underline">
+            <a
+              href="#"
+              className="ml-auto text-sm underline-offset-4 hover:underline"
+            >
               Esqueceu sua senha?
             </a>
           </div>
