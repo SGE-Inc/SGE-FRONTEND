@@ -81,7 +81,12 @@ export function LoginForm({
           />
         </Field>
         <Field>
-          <Button type="submit" disabled={isLoading}>
+          <Button
+            type="submit"
+            disabled={isLoading}
+            size="lg"
+            className="w-full"
+          >
             {isLoading ? "Entrando..." : "Entrar"}
           </Button>
         </Field>

@@ -1,4 +1,4 @@
-import { DashPage } from "@/components/dash-page"
+import { DashPage } from "@/components/layouts/dash-page";
 
 export default function TeamConfigPage() {
   return (
@@ -7,5 +7,5 @@ export default function TeamConfigPage() {
         Gestão da equipa
       </div>
     </DashPage>
-  )
+  );
 }

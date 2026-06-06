@@ -1,4 +1,4 @@
-import { DashPage } from "@/components/dash-page"
+import { DashPage } from "@/components/layouts/dash-page";
 
 export default function GeneralConfigPage() {
   return (
@@ -7,5 +7,5 @@ export default function GeneralConfigPage() {
         Configurações gerais da plataforma
       </div>
     </DashPage>
-  )
+  );
 }

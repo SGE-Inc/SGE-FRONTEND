@@ -1,17 +1,19 @@
 "use client";
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { User } from "@/lib/mock-auth";
 
 export function useAuth() {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User | null>(() => {
+    try {
+      const stored = localStorage.getItem("user");
+      if (stored) return JSON.parse(stored);
+    } catch {
+      localStorage.removeItem("user");
+    }
+    return null;
+  });
 
-  useEffect(() => {
-    const stored = localStorage.getItem("user");
-    if (stored) setUser(JSON.parse(stored));
-    setLoading(false);
-  }, []);
+  const loading = false;
 
   const login = (newUser: User) => {
     localStorage.setItem("user", JSON.stringify(newUser));
