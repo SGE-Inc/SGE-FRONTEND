@@ -66,7 +66,7 @@ const adminNav = [
 ];
 
 const alunoNav = [
-  { title: "Dashboard", url: "/aluno/dashboard", icon: <LayoutDashboard /> },
+  { title: "Meu Painel", url: "/aluno/dashboard", icon: <LayoutDashboard /> },
   { title: "Horário", url: "/aluno/horario", icon: <Calendar /> },
   {
     title: "Horário de Provas",
