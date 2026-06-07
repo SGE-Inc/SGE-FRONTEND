@@ -97,14 +97,27 @@ const ChartTooltip = RechartsPrimitive.Tooltip;
 
 const ChartTooltipContent = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
-    React.ComponentProps<"div"> & {
-      hideLabel?: boolean;
-      hideIndicator?: boolean;
-      indicator?: "line" | "dot" | "dashed";
-      nameKey?: string;
-      labelKey?: string;
-    }
+  React.ComponentProps<"div"> & {
+    active?: boolean;
+    payload?: Record<string, unknown>[];
+    className?: string;
+    hideLabel?: boolean;
+    hideIndicator?: boolean;
+    indicator?: "line" | "dot" | "dashed";
+    nameKey?: string;
+    labelKey?: string;
+    label?: string;
+    labelFormatter?: (value: unknown, payload: unknown[]) => React.ReactNode;
+    formatter?: (
+      value: unknown,
+      name: string,
+      item: unknown,
+      index: number,
+      payload: unknown,
+    ) => React.ReactNode;
+    color?: string;
+    labelClassName?: string;
+  }
 >(
   (
     {
@@ -172,21 +185,26 @@ const ChartTooltipContent = React.forwardRef<
       >
         {!nestLabel ? tooltipLabel : null}
         <div className="grid gap-1.5">
-          {payload.map((item, index) => {
-            const key = `${nameKey || item.name || item.dataKey || "value"}`;
+          {payload.map((item: Record<string, unknown>, index: number) => {
+            const itemValue = item.value as number | undefined;
+            const itemName = item.name as string | undefined;
+            const key = `${nameKey || itemName || (item.dataKey as string) || "value"}`;
             const itemConfig = getPayloadConfigFromPayload(config, item, key);
-            const indicatorColor = color || item.payload?.fill || item.color;
+            const indicatorColor =
+              color ||
+              ((item.payload as Record<string, unknown>)?.fill as string) ||
+              (item.color as string);
 
             return (
               <div
-                key={item.dataKey}
+                key={item.dataKey as React.Key}
                 className={cn(
                   "flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground",
                   indicator === "dot" && "items-center",
                 )}
               >
-                {formatter && item?.value !== undefined && item.name ? (
-                  formatter(item.value, item.name, item, index, item.payload)
+                {formatter && itemValue !== undefined && itemName ? (
+                  formatter(itemValue, itemName, item, index, item.payload)
                 ) : (
                   <>
                     {itemConfig?.icon ? (
@@ -222,12 +240,12 @@ const ChartTooltipContent = React.forwardRef<
                       <div className="grid gap-1.5">
                         {nestLabel ? tooltipLabel : null}
                         <span className="text-muted-foreground">
-                          {itemConfig?.label || item.name}
+                          {itemConfig?.label || itemName}
                         </span>
                       </div>
-                      {item.value && (
+                      {itemValue != null && (
                         <span className="font-mono font-medium tabular-nums text-foreground">
-                          {item.value.toLocaleString()}
+                          {itemValue.toLocaleString()}
                         </span>
                       )}
                     </div>
@@ -245,7 +263,7 @@ ChartTooltipContent.displayName = "ChartTooltipContent";
 
 function getPayloadConfigFromPayload(
   config: ChartConfig,
-  payload: unknown,
+  payload: Record<string, unknown>,
   key: string,
 ) {
   if (typeof payload !== "object" || payload === null) return undefined;
@@ -279,4 +297,4 @@ function getPayloadConfigFromPayload(
     : config[key as keyof typeof config];
 }
 
-export { ChartContainer, ChartTooltip, ChartTooltipContent };
+export { ChartContainer, ChartStyle, ChartTooltip, ChartTooltipContent };
