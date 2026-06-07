@@ -17,13 +17,12 @@ import {
   LayoutDashboard,
   Calendar,
   CalendarClock,
-  IdCard,
-  AlertTriangle,
   Bell,
   Info,
   Users,
   FileText,
   User,
+  GraduationCapIcon,
 } from "lucide-react";
 
 const adminNav = [
@@ -69,6 +68,11 @@ const adminNav = [
 const alunoNav = [
   { title: "Meu Painel", url: "/aluno/dashboard", icon: <LayoutDashboard /> },
   { title: "Meu Perfil", url: "/aluno/meu-perfil", icon: <User /> },
+  {
+    title: "Minha Turma",
+    url: "/aluno/minha-turma",
+    icon: <GraduationCapIcon />,
+  },
   { title: "Horário", url: "/aluno/horario", icon: <Calendar /> },
   {
     title: "Horário de Provas",
@@ -76,8 +80,6 @@ const alunoNav = [
     icon: <CalendarClock />,
   },
   { title: "Boletins", url: "/aluno/boletins", icon: <BookOpenIcon /> },
-  { title: "Cartão", url: "/aluno/cartao", icon: <IdCard /> },
-  { title: "Faltas", url: "/aluno/faltas", icon: <AlertTriangle /> },
   { title: "Convocatórias", url: "/aluno/convocatorias", icon: <Bell /> },
   { title: "Informações", url: "/aluno/informacoes", icon: <Info /> },
 ];
