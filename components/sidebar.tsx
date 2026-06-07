@@ -91,8 +91,13 @@ const professorNav = [
     icon: <LayoutDashboard />,
   },
   {
-    title: "Turma",
+    title: "Minha Turma",
     url: "/professor/turma",
+    icon: <GraduationCapIcon />,
+  },
+  {
+    title: "Estudantes",
+    url: "/professor/estudantes",
     icon: <Users />,
   },
   { title: "Exames", url: "/professor/exames", icon: <FileText /> },
