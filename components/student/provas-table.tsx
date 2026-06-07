@@ -79,7 +79,7 @@ export function ProvasTable({ data }: ProvasTableProps) {
           className=" w-full overflow-x-auto rounded-lg border border-zinc-200 shadow-inner pb-2 p-1 custom-scroll"
           style={{ scrollbarWidth: "thin" }}
         >
-          <table className="w-full min-w-max border-collapse text-sm overflow-hidden rounded-md">
+          <table className="w-full border-collapse text-sm overflow-hidden rounded-md">
             <thead>
               <tr className="bg-primary text-white text-center text-xs font-semibold">
                 <th className="border border-primary/20 px-4 py-3 text-left min-w-[110px] sticky left-0 bg-primary z-10">

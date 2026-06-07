@@ -86,17 +86,22 @@ const alunoNav = [
 
 const professorNav = [
   {
-    title: "Dashboard",
+    title: "Meu Painel",
     url: "/professor/dashboard",
     icon: <LayoutDashboard />,
   },
   {
-    title: "Estudantes / Classes",
-    url: "/professor/estudantes",
+    title: "Turma",
+    url: "/professor/turma",
     icon: <Users />,
   },
   { title: "Exames", url: "/professor/exames", icon: <FileText /> },
-  { title: "Schedules", url: "/professor/schedules", icon: <Calendar /> },
+  { title: "Horário", url: "/professor/schedules", icon: <Calendar /> },
+  {
+    title: "Horário de Provas",
+    url: "/professor/horario-de-provas",
+    icon: <CalendarClock />,
+  },
 ];
 
 const navByRole = {
