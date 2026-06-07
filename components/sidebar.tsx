@@ -23,6 +23,7 @@ import {
   Info,
   Users,
   FileText,
+  User,
 } from "lucide-react";
 
 const adminNav = [
@@ -67,6 +68,7 @@ const adminNav = [
 
 const alunoNav = [
   { title: "Meu Painel", url: "/aluno/dashboard", icon: <LayoutDashboard /> },
+  { title: "Meu Perfil", url: "/aluno/meu-perfil", icon: <User /> },
   { title: "Horário", url: "/aluno/horario", icon: <Calendar /> },
   {
     title: "Horário de Provas",
