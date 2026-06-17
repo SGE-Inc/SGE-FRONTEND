@@ -219,13 +219,12 @@
 - **Atualmente:** 3 cards placeholder (Agendados, Realizados, Taxa Aprovação) + "Calendário exames"
 - **O que deve conter:**
   - **Gestão de exames:**
-    - Calendário global de exames por curso/trimestre
+    - Calendário global de exames por curso e trimestre
     - Tabela de exames: Disciplina, Turma, Data, Sala, Tipo (1ª/2ª Prova), Estado
     - CRUD:
       - **Agendar exame:** disciplina, turma, data, hora, sala, trimestre, tipo
       - **Editar/Remover exame**
       - **Lançar resultados** (notas por estudante)
-    - Estatísticas: taxa de aprovação por disciplina/curso, média geral
     - Histórico de exames anteriores
   - Definição de épocas de exame (calendário académico)
 
@@ -234,10 +233,11 @@
 - **O que deve conter:**
   - Informações da instituição (nome, logotipo, endereço, contactos)
   - Configuração de ano lectivo
+  - cadastro de desciplinas por curso ( informatica e Electronica )
   - Definição de trimestres/períodos
   - Configuração de cursos (Informática, Electrónica) e turmas
   - Definição de disciplinas por curso/classe
-  - Parâmetros de avaliação (peso PP, PT, MT por trimestre)
+  - Parâmetros de avaliação (peso PP ( prova dos professores), PT ( prova trimestral), MAC ( Media das avaliações continuas ) e MT ( Media trimestral ))
   - Gestão de utilizadores (admin password, criação de outros admins)
 
 ### 3.6. Configurações — Equipa (`/admin/configuracoes/equipa`) 🟡
