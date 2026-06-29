@@ -68,33 +68,39 @@ export interface UtilizadorAdmin {
 }
 
 export const INSTITUICAO_MOCK: Instituicao = {
-  nome: "Instituto Politécnico Industrial de Luanda",
-  sigla: "IPIL",
+  nome: "Colegio Árvore da Felicidade",
+  sigla: "CAF",
   logotipo: "",
-  endereco: "Rua do IMIL, nº 100, Bairro Operário, Luanda",
-  telefone: "222 123 456",
-  email: "geral@ipil.ao",
-  website: "www.ipil.ao",
-  diretor: "Prof. Dr. António Carlos Fernandes",
+  endereco: "Frente a SIGA, Cuca Luanda, Angola",
+  telefone: "923 456 789",
+  email: "caf@caf.ao",
+  website: "https://colegioarvoredafelicidade.ao",
+  diretor: "Dr. Otavio Yegi Afonso",
 };
 
 export const ANO_LECTIVO_MOCK: AnoLectivo[] = [
   {
-    ano: "2024-2025",
+    ano: "2026-2027",
     dataInicio: "2024-09-01",
     dataFim: "2025-07-31",
     ativo: false,
   },
   {
-    ano: "2025-2026",
+    ano: "2027-2028",
     dataInicio: "2025-09-01",
     dataFim: "2026-07-31",
     ativo: true,
   },
   {
-    ano: "2026-2027",
+    ano: "2028-2029",
     dataInicio: "2026-09-01",
-    dataFim: "2027-07-31",
+    dataFim: "2029-07-31",
+    ativo: false,
+  },
+  {
+    ano: "2029-2030",
+    dataInicio: "2029-09-01",
+    dataFim: "2030-07-31",
     ativo: false,
   },
 ];
