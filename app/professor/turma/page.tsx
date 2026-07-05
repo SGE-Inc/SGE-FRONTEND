@@ -8,6 +8,8 @@ import {
   Upload,
   Megaphone,
   Users,
+  ClipboardPen,
+  ClipboardCheck,
 } from "lucide-react";
 import { DashPage } from "@/components/layouts/dash-page";
 import {
@@ -29,13 +31,23 @@ import {
   AlunosTab,
   AvisosTab,
 } from "@/components/professor/turma/turma-avisos-alunos-tabs";
+import { NotasTab } from "@/components/professor/turma/turma-notas-tab";
+import { SumariosTab } from "@/components/professor/turma/turma-sumarios-tab";
 
-type Tab = "materiais" | "submissoes" | "avisos" | "alunos";
+type Tab =
+  | "materiais"
+  | "submissoes"
+  | "avisos"
+  | "alunos"
+  | "notas"
+  | "sumarios";
 
 const TABS: { key: Tab; label: string; icon: typeof BookOpen }[] = [
   { key: "materiais", label: "Materiais", icon: FileUp },
   { key: "submissoes", label: "Submissões", icon: Upload },
   { key: "avisos", label: "Avisos", icon: Megaphone },
+  { key: "notas", label: "Notas", icon: ClipboardPen },
+  { key: "sumarios", label: "Sumários", icon: ClipboardCheck },
   { key: "alunos", label: "Alunos", icon: Users },
 ];
 
@@ -199,6 +211,10 @@ export default function ProfessorTurmaPage() {
                 onRemove={handleRemoveAviso}
               />
             )}
+            {activeTab === "notas" && (
+              <NotasTab disciplina={disciplina} alunos={ALUNOS} />
+            )}
+            {activeTab === "sumarios" && <SumariosTab alunos={ALUNOS} />}
             {activeTab === "alunos" && (
               <AlunosTab alunos={ALUNOS} disciplina={disciplina} />
             )}

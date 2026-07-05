@@ -3,34 +3,74 @@
 import { useState } from "react";
 import { Pencil, Save, X } from "lucide-react";
 import { DashPage } from "@/components/layouts/dash-page";
-import { InfoRow, SectionCard } from "@/components/student/perfil-components";
-import { PERFIL_MOCK, type PerfilData } from "@/components/student/perfil-data";
-import { PerfilHeader } from "@/components/student/perfil-header";
+import { SectionCard, InfoRow } from "@/components/student/perfil-components";
+import { ProfessorPerfilHeader } from "@/components/professor/professor-perfil-header";
+import {
+  PROFESSOR_PERFIL_MOCK,
+  type ProfessorPerfilData,
+} from "@/components/professor/professor-perfil-data";
 import { Button } from "@/components/ui/button";
 
 type EditablePerfil = Omit<
-  PerfilData,
-  "nome" | "role" | "turma" | "numero" | "dadosPreenchidos" | "avatarUrl"
->;
+  ProfessorPerfilData,
+  | "nome"
+  | "role"
+  | "departamento"
+  | "funcionarioId"
+  | "dadosPreenchidos"
+  | "avatarUrl"
+  | "disciplinas"
+  | "turmas"
+> & {
+  disciplinas: string;
+  turmas: string;
+};
 
-export default function MeuPerfilPage() {
-  const [perfil, setPerfil] = useState(PERFIL_MOCK);
+export default function ProfessorMeuPerfilPage() {
+  const [perfil, setPerfil] = useState(PROFESSOR_PERFIL_MOCK);
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState<EditablePerfil>(() => {
-    const { nome, role, turma, numero, dadosPreenchidos, avatarUrl, ...rest } =
-      PERFIL_MOCK;
-    return rest;
+    const {
+      nome,
+      role,
+      departamento,
+      funcionarioId,
+      dadosPreenchidos,
+      avatarUrl,
+      ...rest
+    } = PROFESSOR_PERFIL_MOCK;
+    return {
+      ...rest,
+      disciplinas: rest.disciplinas.join(", "),
+      turmas: rest.turmas.join(", "),
+    };
   });
 
   const handleSave = () => {
-    setPerfil((prev) => ({ ...prev, ...form }));
+    setPerfil((prev) => ({
+      ...prev,
+      ...form,
+      disciplinas: form.disciplinas.split(",").map((s) => s.trim()),
+      turmas: form.turmas.split(",").map((s) => s.trim()),
+    }));
     setEditing(false);
   };
 
   const handleCancel = () => {
-    const { nome, role, turma, numero, dadosPreenchidos, avatarUrl, ...rest } =
-      perfil;
-    setForm(rest);
+    const {
+      nome,
+      role,
+      departamento,
+      funcionarioId,
+      dadosPreenchidos,
+      avatarUrl,
+      ...rest
+    } = perfil;
+    setForm({
+      ...rest,
+      disciplinas: rest.disciplinas.join(", "),
+      turmas: rest.turmas.join(", "),
+    });
     setEditing(false);
   };
 
@@ -77,7 +117,7 @@ export default function MeuPerfilPage() {
         )}
       </div>
 
-      <PerfilHeader perfil={perfil} />
+      <ProfessorPerfilHeader perfil={perfil} />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
         <SectionCard title="Dados Pessoais">
@@ -90,11 +130,6 @@ export default function MeuPerfilPage() {
                 options={["Masculino", "Feminino"]}
               />
               <EditField
-                label="Altura:"
-                value={form.altura ?? ""}
-                onChange={(v) => update("altura", v)}
-              />
-              <EditField
                 label="Estado Civil:"
                 value={form.estadoCivil ?? ""}
                 onChange={(v) => update("estadoCivil", v)}
@@ -104,7 +139,6 @@ export default function MeuPerfilPage() {
           ) : (
             <>
               <InfoRow label="Género:" value={perfil.genero} />
-              <InfoRow label="Altura:" value={perfil.altura} />
               <InfoRow label="Estado Civil:" value={perfil.estadoCivil} />
             </>
           )}
@@ -195,7 +229,7 @@ export default function MeuPerfilPage() {
         </SectionCard>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <SectionCard title="Dados de Localização">
           {editing ? (
             <>
@@ -236,102 +270,41 @@ export default function MeuPerfilPage() {
           )}
         </SectionCard>
 
-        <SectionCard title="Dados Académicos">
+        <SectionCard title="Dados Profissionais">
           {editing ? (
             <>
               <EditField
-                label="Área de Formação:"
-                value={form.areaFormacao ?? ""}
-                onChange={(v) => update("areaFormacao", v)}
+                label="Disciplinas:"
+                value={form.disciplinas}
+                onChange={(v) => update("disciplinas", v)}
+                placeholder="separadas por vírgula"
               />
               <EditField
-                label="Curso:"
-                value={form.curso ?? ""}
-                onChange={(v) => update("curso", v)}
+                label="Turmas:"
+                value={form.turmas}
+                onChange={(v) => update("turmas", v)}
+                placeholder="separadas por vírgula"
               />
               <EditField
-                label="Classe:"
-                value={form.classe ?? ""}
-                onChange={(v) => update("classe", v)}
+                label="Data de Admissão:"
+                value={form.dataAdmissao ?? ""}
+                onChange={(v) => update("dataAdmissao", v)}
               />
               <EditField
-                label="Turno:"
-                value={form.turno ?? ""}
-                onChange={(v) => update("turno", v)}
-                options={["Manhã", "Tarde", "Noite"]}
-              />
-              <EditField
-                label="Turma:"
-                value={form.turmaAcad ?? ""}
-                onChange={(v) => update("turmaAcad", v)}
-              />
-              <EditField
-                label="Número:"
-                value={form.numeroAcad ?? ""}
-                onChange={(v) => update("numeroAcad", v)}
+                label="Habilitações:"
+                value={form.habilitacoes ?? ""}
+                onChange={(v) => update("habilitacoes", v)}
               />
             </>
           ) : (
             <>
-              <InfoRow label="Área de Formação:" value={perfil.areaFormacao} />
-              <InfoRow label="Curso:" value={perfil.curso} />
-              <InfoRow label="Classe:" value={perfil.classe} />
-              <InfoRow label="Turno:" value={perfil.turno} />
-              <InfoRow label="Turma:" value={perfil.turmaAcad} />
-              <InfoRow label="Número:" value={perfil.numeroAcad} />
-            </>
-          )}
-        </SectionCard>
-
-        <SectionCard title="Dados do Encarregado">
-          {editing ? (
-            <>
-              <EditField
-                label="Nome:"
-                value={form.encarregadoNome ?? ""}
-                onChange={(v) => update("encarregadoNome", v)}
-              />
-              <EditField
-                label="Grau Parentesco:"
-                value={form.encarregadoGrauParentesco ?? ""}
-                onChange={(v) => update("encarregadoGrauParentesco", v)}
-              />
-              <EditField
-                label="Gênero:"
-                value={form.encarregadoGenero ?? ""}
-                onChange={(v) => update("encarregadoGenero", v)}
-                options={["Masculino", "Feminino"]}
-              />
-              <EditField
-                label="Data de Nascimento:"
-                value={form.encarregadoDataNascimento ?? ""}
-                onChange={(v) => update("encarregadoDataNascimento", v)}
-              />
-              <EditField
-                label="Telefone:"
-                value={form.encarregadoTelefone ?? ""}
-                onChange={(v) => update("encarregadoTelefone", v)}
-              />
-              <EditField
-                label="Email:"
-                value={form.encarregadoEmail ?? ""}
-                onChange={(v) => update("encarregadoEmail", v)}
-              />
-            </>
-          ) : (
-            <>
-              <InfoRow label="Nome:" value={perfil.encarregadoNome} />
               <InfoRow
-                label="Grau Parentesco:"
-                value={perfil.encarregadoGrauParentesco}
+                label="Disciplinas:"
+                value={perfil.disciplinas.join(", ")}
               />
-              <InfoRow label="Gênero:" value={perfil.encarregadoGenero} />
-              <InfoRow
-                label="Data de Nascimento:"
-                value={perfil.encarregadoDataNascimento}
-              />
-              <InfoRow label="Telefone:" value={perfil.encarregadoTelefone} />
-              <InfoRow label="Email:" value={perfil.encarregadoEmail} />
+              <InfoRow label="Turmas:" value={perfil.turmas.join(", ")} />
+              <InfoRow label="Data de Admissão:" value={perfil.dataAdmissao} />
+              <InfoRow label="Habilitações:" value={perfil.habilitacoes} />
             </>
           )}
         </SectionCard>
@@ -345,11 +318,13 @@ function EditField({
   value,
   onChange,
   options,
+  placeholder,
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
   options?: string[];
+  placeholder?: string;
 }) {
   return (
     <div className="flex items-center justify-between gap-4 py-2.5">
@@ -371,11 +346,11 @@ function EditField({
         </select>
       ) : (
         <input
-          type={label.toLowerCase().includes("data") ? "text" : "text"}
+          type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           className="w-44 rounded-md border border-zinc-200 bg-white px-2 py-1.5 text-xs text-zinc-700 focus:outline-none focus:ring-1 focus:ring-primary/30"
-          placeholder={label.replace(":", "")}
+          placeholder={placeholder ?? label.replace(":", "")}
         />
       )}
     </div>

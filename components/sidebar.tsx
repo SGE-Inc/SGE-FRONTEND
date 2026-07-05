@@ -23,6 +23,8 @@ import {
   FileText,
   User,
   GraduationCapIcon,
+  ScrollText,
+  Newspaper,
 } from "lucide-react";
 
 const adminNav = [
@@ -55,6 +57,21 @@ const adminNav = [
     ],
   },
   {
+    title: "Convocatórias",
+    url: "/admin/convocatorias",
+    icon: <ScrollText />,
+  },
+  {
+    title: "Informações",
+    url: "/admin/informacoes",
+    icon: <Newspaper />,
+  },
+  {
+    title: "Notificações",
+    url: "/admin/notificacoes",
+    icon: <Bell />,
+  },
+  {
     title: "Configurações",
     url: "#",
     icon: <Settings2Icon />,
@@ -82,6 +99,11 @@ const alunoNav = [
   { title: "Boletins", url: "/aluno/boletins", icon: <BookOpenIcon /> },
   { title: "Convocatórias", url: "/aluno/convocatorias", icon: <Bell /> },
   { title: "Informações", url: "/aluno/informacoes", icon: <Info /> },
+  {
+    title: "Notificações",
+    url: "/aluno/notificacoes",
+    icon: <Bell />,
+  },
 ];
 
 const professorNav = [
@@ -96,6 +118,11 @@ const professorNav = [
     icon: <GraduationCapIcon />,
   },
   {
+    title: "Meu Perfil",
+    url: "/professor/meu-perfil",
+    icon: <User />,
+  },
+  {
     title: "Estudantes",
     url: "/professor/estudantes",
     icon: <Users />,
@@ -106,6 +133,11 @@ const professorNav = [
     title: "Horário de Provas",
     url: "/professor/horario-de-provas",
     icon: <CalendarClock />,
+  },
+  {
+    title: "Notificações",
+    url: "/professor/notificacoes",
+    icon: <Bell />,
   },
 ];
 

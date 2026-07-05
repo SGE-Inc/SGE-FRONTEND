@@ -52,6 +52,23 @@ export interface Aluno {
   status: "regular" | "atencao" | "risco";
 }
 
+export interface NotaAluno {
+  alunoId: string;
+  pp: number | null;
+  pt: number | null;
+  mac: number | null;
+  mt: number | null;
+  faltas: number;
+}
+
+export interface NotasDisciplina {
+  disciplinaId: string;
+  trimestre: Trimestre;
+  notas: NotaAluno[];
+}
+
+export type Trimestre = "I TRIMESTRE" | "II TRIMESTRE" | "III TRIMESTRE";
+
 // ── Mock data ─────────────────────────────────────────────────────────────────
 
 export const DISCIPLINAS: Disciplina[] = [
@@ -249,6 +266,58 @@ export const AVISOS: Aviso[] = [
     autor: "Prof. Margarida Silva",
   },
 ];
+
+export const NOTAS_MOCK: NotasDisciplina[] = [
+  {
+    disciplinaId: "qui-qi10b",
+    trimestre: "I TRIMESTRE",
+    notas: [
+      { alunoId: "a1", pp: 16, pt: 18, mac: 15, mt: null, faltas: 0 },
+      { alunoId: "a2", pp: 14, pt: 15, mac: 13, mt: null, faltas: 1 },
+      { alunoId: "a3", pp: 12, pt: 14, mac: 11, mt: null, faltas: 2 },
+      { alunoId: "a4", pp: 10, pt: 12, mac: 10, mt: null, faltas: 3 },
+      { alunoId: "a5", pp: 9, pt: 11, mac: 8, mt: null, faltas: 5 },
+      { alunoId: "a6", pp: 11, pt: 10, mac: 9, mt: null, faltas: 4 },
+      { alunoId: "a7", pp: 8, pt: 9, mac: 7, mt: null, faltas: 6 },
+      { alunoId: "a8", pp: 7, pt: 8, mac: 6, mt: null, faltas: 8 },
+      { alunoId: "a9", pp: 6, pt: 7, mac: 5, mt: null, faltas: 10 },
+      { alunoId: "a10", pp: 15, pt: 16, mac: 14, mt: null, faltas: 1 },
+      { alunoId: "a11", pp: 13, pt: 14, mac: 12, mt: null, faltas: 2 },
+      { alunoId: "a12", pp: 12, pt: 13, mac: 11, mt: null, faltas: 3 },
+    ],
+  },
+  {
+    disciplinaId: "qui-qi10b",
+    trimestre: "II TRIMESTRE",
+    notas: [
+      { alunoId: "a1", pp: null, pt: null, mac: null, mt: null, faltas: 0 },
+      { alunoId: "a2", pp: null, pt: null, mac: null, mt: null, faltas: 0 },
+      { alunoId: "a3", pp: null, pt: null, mac: null, mt: null, faltas: 0 },
+      { alunoId: "a4", pp: null, pt: null, mac: null, mt: null, faltas: 0 },
+      { alunoId: "a5", pp: null, pt: null, mac: null, mt: null, faltas: 0 },
+      { alunoId: "a6", pp: null, pt: null, mac: null, mt: null, faltas: 0 },
+      { alunoId: "a7", pp: null, pt: null, mac: null, mt: null, faltas: 0 },
+      { alunoId: "a8", pp: null, pt: null, mac: null, mt: null, faltas: 0 },
+      { alunoId: "a9", pp: null, pt: null, mac: null, mt: null, faltas: 0 },
+      { alunoId: "a10", pp: null, pt: null, mac: null, mt: null, faltas: 0 },
+      { alunoId: "a11", pp: null, pt: null, mac: null, mt: null, faltas: 0 },
+      { alunoId: "a12", pp: null, pt: null, mac: null, mt: null, faltas: 0 },
+    ],
+  },
+];
+
+export const TRIMESTRES: Trimestre[] = [
+  "I TRIMESTRE",
+  "II TRIMESTRE",
+  "III TRIMESTRE",
+];
+
+export const AVALIACOES = [
+  { key: "pp", label: "PP" },
+  { key: "pt", label: "PT" },
+  { key: "mac", label: "MAC" },
+  { key: "mt", label: "MT" },
+] as const;
 
 export const ALUNOS: Aluno[] = [
   {

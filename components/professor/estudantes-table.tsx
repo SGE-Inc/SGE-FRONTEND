@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Search, Download, Eye, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -183,13 +184,13 @@ export function ProfessorEstudantesTable() {
                       {aluno.mt}
                     </td>
                     <td className="px-4 py-2.5 text-center border border-zinc-200">
-                      <button
-                        onClick={() => setSelectedAluno(aluno)}
-                        className="rounded-md p-1.5 text-primary hover:bg-primary/10 transition"
+                      <Link
+                        href={`/professor/estudantes/${aluno.id}`}
+                        className="rounded-md p-1.5 text-primary hover:bg-primary/10 transition inline-flex"
                         title="Ver perfil"
                       >
                         <Eye className="size-4" />
-                      </button>
+                      </Link>
                     </td>
                   </tr>
                 );

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import {
   Search,
   Plus,
@@ -478,13 +479,13 @@ export function EstudantesTable({
 
                     <td className="px-4 py-3">
                       <div className="flex items-center justify-center gap-1">
-                        <button
-                          onClick={() => setDetailEstudante(e)}
+                        <Link
+                          href={`/admin/estudantes/${e.id}`}
                           title="Ver perfil"
                           className="flex size-7 items-center justify-center rounded-md text-zinc-400 hover:bg-blue-50 hover:text-blue-600 transition-colors"
                         >
                           <Eye className="size-3.5" />
-                        </button>
+                        </Link>
                         <button
                           onClick={() => handleEdit(e)}
                           title="Editar"

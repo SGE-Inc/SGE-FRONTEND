@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { Upload } from "lucide-react";
+import { Upload, ClipboardCheck } from "lucide-react";
 import { DashPage } from "@/components/layouts/dash-page";
 import { MaterialsList } from "@/components/student/turma/materials-list";
 import { SubmitMaterialDialog } from "@/components/student/turma/submit-material-dialog";
@@ -66,6 +66,75 @@ export default function DisciplinaPage() {
         </div>
 
         <MaterialsList materiais={disciplina.materiais} />
+
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center gap-2">
+            <ClipboardCheck className="size-4 text-primary" />
+            <h3 className="text-sm font-semibold text-zinc-800">Presenças</h3>
+          </div>
+
+          <div className="rounded-xl border border-zinc-200 overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse text-sm min-w-[500px]">
+                <thead>
+                  <tr className="bg-primary text-white text-xs font-semibold">
+                    <th className="px-4 py-2.5 text-left">Data</th>
+                    <th className="px-4 py-2.5 text-left">Conteúdo</th>
+                    <th className="px-4 py-2.5 text-center w-24">Presença</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    {
+                      data: "08/06/2026",
+                      conteudo:
+                        "Reacções de neutralização. Titulação ácido-base.",
+                      presente: true,
+                    },
+                    {
+                      data: "04/06/2026",
+                      conteudo: "Escala de pH. Cálculo de pH.",
+                      presente: true,
+                    },
+                    {
+                      data: "01/06/2026",
+                      conteudo: "Introdução às reacções ácido-base.",
+                      presente: true,
+                    },
+                    {
+                      data: "28/05/2026",
+                      conteudo:
+                        "Correcção do TPC. Exercícios de estequiometria.",
+                      presente: false,
+                    },
+                  ].map((p, idx) => (
+                    <tr
+                      key={idx}
+                      className="border-b border-zinc-100 hover:bg-zinc-50/60"
+                    >
+                      <td className="px-4 py-2.5 text-xs text-zinc-700 font-medium">
+                        {p.data}
+                      </td>
+                      <td className="px-4 py-2.5 text-xs text-zinc-500">
+                        {p.conteudo}
+                      </td>
+                      <td className="px-4 py-2.5 text-center">
+                        <span
+                          className={cn(
+                            "inline-flex items-center gap-1 text-xs font-semibold",
+                            p.presente ? "text-emerald-600" : "text-red-500",
+                          )}
+                        >
+                          {p.presente ? "Presente" : "Falta"}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
 
       <SubmitMaterialDialog
